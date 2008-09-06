@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="chrome://personas/content/personas.css" type="text/css"?>
+<?xml-stylesheet href="chrome://personas/skin/personas.css" type="text/css"?>
+<?xml-stylesheet href="chrome://personas/content/textColor.css" type="text/css"?>
+
+<!DOCTYPE overlay SYSTEM "chrome://personas/locale/personas.dtd">
+<overlay id="personas-overlay"
+         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <stringbundleset id="stringbundleset">
+    <stringbundle id="personasStringBundle" src="chrome://personas/locale/personas.properties"/>
+  </stringbundleset>
+
+  <script type="application/x-javascript;version=1.7" src="chrome://personas/content/init.js"/>
+  <script type="application/x-javascript;version=1.7" src="chrome://personas/content/personas.js"/>
+
+  <menupopup id="menu_ToolsPopup">
+    <menu id="personas-menu" label="&personas_app_title;" insertafter="menu_preferences">
+       <menupopup id="personas-selector-menu"
+                  onpopupshowing="if (event.target == this) PersonaController.onPersonaPopupShowing(event)"
+                  onpopuphiding="if (event.target == this) PersonaController.onMenuPopupHiding();">
+        <menuitem label="&useDefaultPersona.label;" personaid="default"
+                  oncommand="PersonaController.onSelectDefault(event)"/>
+        <menuseparator/>
+        <menuitem label="&manual.label;"
+                   oncommand="PersonaController.onSelectCustom(event)"/>
+      </menupopup>
+    </menu>
+  </menupopup>
+
+  <statusbar id="status-bar">
+    <statusbarpanel id="personas-selector-button" class="statusbarpanel-menu-iconic"
+					src="chrome://personas/content/personas_16x16.png"
+                    insertbefore="statusbar-display" onmousedown="PersonaController.onMenuButtonMouseDown();">
+	</statusbarpanel>
+  </statusbar>
+
+</overlay>

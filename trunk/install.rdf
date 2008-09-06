@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RDF xmlns="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+ xmlns:em="http://www.mozilla.org/2004/em-rdf#">
+  <Description about="urn:mozilla:install-manifest">
+    <em:id>personas@neoalchemy.org</em:id>
+    <em:name>Personas for Songbrid</em:name>
+    <em:version>0.1.0</em:version>
+    <em:description>Themes, skins, feathers and more.</em:description>
+    <em:creator>Ryan Zielke</em:creator>
+    <em:iconURL>chrome://personas/content/personas_32x32.png</em:iconURL>
+    <em:targetApplication>
+      <Description>
+			<em:id>songbird@songbirdnest.com</em:id>
+			<em:minVersion>0.7</em:minVersion>
+			<em:maxVersion>0.8.0pre</em:maxVersion>
+		</Description>
+    </em:targetApplication>
+  </Description>
+</RDF>
