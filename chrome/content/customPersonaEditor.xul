@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?xml-stylesheet href="chrome://browser/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://personas/content/customPersonaEditor.css" type="text/css"?>
+
+<!DOCTYPE overlay SYSTEM "chrome://personas/locale/personas.dtd">
+
+<window id="customPersonaEditor"
+        align="center"
+        xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <stringbundleset id="stringbundleset">
+    <stringbundle id="personasStringBundle" src="chrome://personas/locale/personas.properties"/>
+  </stringbundleset>
+
+  
+  <script type="application/x-javascript;version=1.7" src="chrome://personas/content/init.js"/>
+  <script type="application/x-javascript;version=1.7" src="chrome://personas/content/customPersonaEditor.js"/>
+  
+  
+  <vbox id="top">
+    <hbox>
+      <image src="chrome://personas/content/personas-logo.png"/>
+    </hbox>
+  </vbox>
+
+  <vbox id="form">
+    <description id="title" value="&customPersona.label;"/>
+    <grid>
+      <columns>
+        <column/>
+        <column/>
+      </columns>
+      <rows>
+		<row align="center">
+          <hbox flex="1" pack="end">
+            <label control="titlebar" value="&titlebar.label;"/>
+          </hbox>
+		  <hbox pref="custom.titlebar">
+            <textbox id="titlebar" />
+            <button id="selectTitlebarButton" label="&selectBackground.label;"
+                    oncommand="CustomPersonaEditor.onSelectBackground(event)"/>
+            <colorpicker id="selectTitlebarColor" palettename="standard" 
+						 type="button" onchange="CustomPersonaEditor.onSelectColor(event)" />
+          </hbox>
+        </row>
+        <row align="center">
+          <hbox flex="1" pack="end">
+            <label control="navbar" value="&navbar.label;"/>
+          </hbox>
+		  <hbox pref="custom.navbar">
+            <textbox id="navbar" />
+            <button id="selectNavbarButton" label="&selectBackground.label;"
+                    oncommand="CustomPersonaEditor.onSelectBackground(event)"/>
+            <colorpicker id="selectNavbarColor" palettename="standard" 
+						 type="button" onchange="CustomPersonaEditor.onSelectColor(event)" />
+          </hbox>
+        </row>
+        <row align="center">
+          <hbox flex="1" pack="end">
+            <label control="controlPane" value="&controlPane.label;"/>
+          </hbox>
+          <hbox pref="custom.controlPane">
+            <textbox id="controlPane" />
+            <button id="selectControlPaneButton" label="&selectBackground.label;"
+                    oncommand="CustomPersonaEditor.onSelectBackground(event)"/>
+            <colorpicker id="selectControlPaneColor" palettename="standard" 
+						 type="button" onchange="CustomPersonaEditor.onSelectColor(event)" />
+          </hbox>
+        </row>
+        <row align="center">
+          <hbox flex="1" pack="end">
+            <label control="servicePane" value="&servicePane.label;"/>
+          </hbox>
+		  <hbox pref="custom.servicePane">
+            <textbox id="servicePane" />
+            <button id="selectServicePaneButton" label="&selectBackground.label;"
+                    oncommand="CustomPersonaEditor.onSelectBackground(event)"/>
+            <colorpicker id="selectServicePaneColor" palettename="standard" 
+						 type="button" onchange="CustomPersonaEditor.onSelectColor(event)" />
+          </hbox>
+        </row>
+      </rows>
+    </grid>
+    <hbox style="margin-top: 2em">
+      <button label="Close" oncommand="CustomPersonaEditor.onClose()"/>
+      <spacer flex="1"/>
+      <button label="Preview" oncommand="CustomPersonaEditor.onPreview()"/>
+      <button label="Apply" oncommand="CustomPersonaEditor.onApply()"/>
+    </hbox>
+  </vbox>
+</window>

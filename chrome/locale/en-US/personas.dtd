@@ -1,0 +1,16 @@
+<!ENTITY personas_app_title 	  "Personas for Songbird">
+
+<!ENTITY useDefaultPersona.label  "Default">
+<!ENTITY manual.label   		  "Manual...">
+
+<!ENTITY customPersona.label      "Custom Persona">
+
+<!ENTITY controlPane.label        "Control Pane:">
+<!ENTITY servicePane.label        "Service Pane:">
+<!ENTITY titlebar.label           "Top Bar:">
+<!ENTITY navbar.label             "Navigation Bar:">
+
+<!ENTITY selectBackground.label     "Browse...">
+<!ENTITY closeButton.label          "Close">
+<!ENTITY previewButton.label        "Preview">
+<!ENTITY applyButton.label          "Apply">
