@@ -3,8 +3,8 @@
  xmlns:em="http://www.mozilla.org/2004/em-rdf#">
   <Description about="urn:mozilla:install-manifest">
     <em:id>personas@neoalchemy.org</em:id>
-    <em:name>Personas for Songbrid</em:name>
-    <em:version>0.1.0</em:version>
+    <em:name>Personas for Songbird</em:name>
+    <em:version>0.1.1</em:version>
     <em:description>Themes, skins, feathers and more.</em:description>
     <em:creator>Ryan Zielke</em:creator>
     <em:iconURL>chrome://personas/content/personas_32x32.png</em:iconURL>
