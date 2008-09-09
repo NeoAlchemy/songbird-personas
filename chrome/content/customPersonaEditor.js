@@ -35,11 +35,39 @@ let CustomPersonaEditor = {
     return this._titlebar;
   },
   
+  get _titlebarText() {
+    let titlebarText = document.getElementById("titlebarText");
+    delete this._titlebarText;
+    this._titlebarText = titlebarText;
+    return this._titlebarText;
+  },
+  
   get _navbar() {
     let navbar = document.getElementById("navbar");
     delete this._navbar;
     this._navbar = navbar;
     return this._navbar;
+  },
+  
+  get _statusbar() {
+    let statusbar = document.getElementById("statusbar");
+    delete this._statusbar;
+    this._statusbar = statusbar;
+    return this._statusbar;
+  },
+  
+  get _servicePaneStatusbar() {
+    let servicePaneStatusbar = document.getElementById("servicePaneStatusbar");
+    delete this._servicePaneStatusbar;
+    this._servicePaneStatusbar = servicePaneStatusbar;
+    return this._servicePaneStatusbar;
+  },
+  
+  get _main() {
+    let main = document.getElementById("main");
+    delete this._main;
+    this._main = main;
+    return this._main;
   },
 
   // Preference Service
@@ -72,11 +100,20 @@ let CustomPersonaEditor = {
 	var servicePaneValue = this._getPref("custom.servicePane", "");
 	var titlebarValue = this._getPref("custom.titlebar", "");
 	var navbarValue = this._getPref("custom.navbar", "");
+	var statusbarValue = this._getPref("custom.statusbar", ""); 
+	var servicePaneStatusbarValue = this._getPref("custom.servicePaneStatusbar", "");
+	var mainValue = this._getPref("custom.main", ""); 
+	var titlebarTextValue = this._getPref("custom.titlebarText", "");
+	
 	
     this._controlPane.value = controlPaneValue;
     this._servicePane.value = servicePaneValue;
     this._titlebar.value = titlebarValue;
     this._navbar.value = navbarValue;
+    this._statusbar.value = statusbarValue;
+    this._servicePaneStatusbar.value = servicePaneStatusbarValue;
+    this._main.value = mainValue;
+    this._titlebarText.value = titlebarTextValue;
   },
 
 
@@ -115,11 +152,19 @@ let CustomPersonaEditor = {
 	let servicePaneValue = this._servicePane.value;
 	let titlebarValue = this._titlebar.value;
 	let navbarValue = this._navbar.value;
+	let statusbarValue = this._statusbar.value;
+	let servicePaneStatusbarValue = this._servicePaneStatusbar.value;
+	let mainValue = this._main.value;
+	let titlebarTextValue = this._titlebarText.value;
 	
 	this._prefSvc.setCharPref("custom.controlPane", controlPaneValue);
 	this._prefSvc.setCharPref("custom.servicePane", servicePaneValue);
 	this._prefSvc.setCharPref("custom.titlebar", titlebarValue);
 	this._prefSvc.setCharPref("custom.navbar", navbarValue);
+	this._prefSvc.setCharPref("custom.statusbar", statusbarValue);
+	this._prefSvc.setCharPref("custom.servicePaneStatusbar", servicePaneStatusbarValue);
+	this._prefSvc.setCharPref("custom.main", mainValue);
+	this._prefSvc.setCharPref("custom.titlebarText", titlebarTextValue);
 	
 	this.onPreview()
 	
@@ -132,15 +177,32 @@ let CustomPersonaEditor = {
 	var servicePaneStyle = this._createBackgroundStyle(this._servicePane.value);
 	var titlebarStyle = this._createBackgroundStyle(this._titlebar.value);
 	var navbarStyle = this._createBackgroundStyle(this._navbar.value);
+	var statusbarStyle = this._createBackgroundStyle(this._statusbar.value);
+	var servicePaneStatusbarStyle = this._createBackgroundStyle(this._servicePaneStatusbar.value);
+	var mainStyle = this._createBackgroundStyle(this._main.value);
+	
+	var titlebarTextStyle = this._titlebarText.value;
+	
+	var emptyStyle = this._createBackgroundStyle("");
 	
 	var rule_index = 0;
 	var cssRules = new Array();
-	cssRules[rule_index++] = "#control_pane { " + controlPaneStyle + " }";
-	cssRules[rule_index++] = "#sb_servicepane { " + servicePaneStyle + " }";
-	cssRules[rule_index++] = "#sb-sys-titlebar, #main-menubar { " + titlebarStyle + " }";
-	cssRules[rule_index++] = "#nav-bar { " + navbarStyle + " }";
-	
-	//cssRules[rule_index++] = "#sb-sys-title-title, .menubar-text { color: #FF0000 !important; }";
+	if (controlPaneStyle != emptyStyle)
+		cssRules[rule_index++] = "#control_pane, #control_pane_box { " + controlPaneStyle + " }"; 
+	if (servicePaneStyle != emptyStyle)
+		cssRules[rule_index++] = "#sb_servicepane { " + servicePaneStyle + " }";
+	if (titlebarStyle != emptyStyle)
+		cssRules[rule_index++] = "#sb-sys-titlebar, #main-menubar  { " + titlebarStyle + " }";
+	if (navbarStyle != emptyStyle)
+		cssRules[rule_index++] = "#nav-bar { " + navbarStyle + " }";
+	if (statusbarStyle != emptyStyle)
+		cssRules[rule_index++] = "#status-bar { " + statusbarStyle + " }";
+	if (servicePaneStatusbarStyle != emptyStyle)
+		cssRules[rule_index++] = "#servicepane-status-bar { " + servicePaneStatusbarStyle + " }";
+	if (mainStyle != emptyStyle)
+		cssRules[rule_index++] = "#mainplayer { " + mainStyle + " }";
+	if (titlebarTextStyle)
+		cssRules[rule_index++] = "#sb-sys-title-title, .menubar-text { color: " + titlebarTextStyle + " !important; }";
 	 
 			
 	styleSheetUtility.deleteAllRules();
