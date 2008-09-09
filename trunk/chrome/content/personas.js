@@ -55,13 +55,32 @@ let PersonaController = {
 	var servicePaneStyle = this._createBackgroundStyle(this._getPref("custom.servicePane", ""));
     var titlebarStyle = this._createBackgroundStyle(this._getPref("custom.titlebar", ""));
 	var navbarStyle = this._createBackgroundStyle(this._getPref("custom.navbar", ""));
+	var statusbarStyle = this._createBackgroundStyle(this._getPref("custom.statusbar", ""));
+	var servicePaneStatusbarStyle = this._createBackgroundStyle(this._getPref("custom.servicePaneStatusbar", ""));
+	var mainStyle = this._createBackgroundStyle(this._getPref("custom.main", ""));
+	
+	var titlebarTextStyle = this._getPref("custom.titlebarText", "");
+	
+	var emptyStyle = this._createBackgroundStyle("");
 	
 	var rule_index = 0;
 	var cssRules = new Array();
-	cssRules[rule_index++] = "#control_pane { " + controlPaneStyle + " }"; 
-	cssRules[rule_index++] = "#sb_servicepane { " + servicePaneStyle + " }";
-	cssRules[rule_index++] = "#sb-sys-titlebar, #main-menubar  { " + titlebarStyle + " }";
-	cssRules[rule_index++] = "#nav-bar { " + navbarStyle + " }";
+	if (controlPaneStyle != emptyStyle)
+		cssRules[rule_index++] = "#control_pane, #control_pane_box { " + controlPaneStyle + " }"; 
+	if (servicePaneStyle != emptyStyle)
+		cssRules[rule_index++] = "#sb_servicepane { " + servicePaneStyle + " }";
+	if (titlebarStyle != emptyStyle)
+		cssRules[rule_index++] = "#sb-sys-titlebar, #main-menubar  { " + titlebarStyle + " }";
+	if (navbarStyle != emptyStyle)
+		cssRules[rule_index++] = "#nav-bar { " + navbarStyle + " }";
+	if (statusbarStyle != emptyStyle)
+		cssRules[rule_index++] = "#status-bar { " + statusbarStyle + " }";
+	if (servicePaneStatusbarStyle != emptyStyle)
+		cssRules[rule_index++] = "#servicepane-status-bar { " + servicePaneStatusbarStyle + " }";
+	if (mainStyle != emptyStyle)
+		cssRules[rule_index++] = "#mainplayer { " + mainStyle + " }";
+	if (titlebarTextStyle)
+		cssRules[rule_index++] = "#sb-sys-title-title, .menubar-text { color: " + titlebarTextStyle + " !important; }";
 			
 	styleSheetUtility.deleteAllRules();
 	styleSheetUtility.insertAllRules(cssRules);

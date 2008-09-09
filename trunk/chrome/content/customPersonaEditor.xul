@@ -34,6 +34,18 @@
       <rows>
 		<row align="center">
           <hbox flex="1" pack="end">
+            <label control="main" value="&main.label;"/>
+          </hbox>
+		  <hbox pref="custom.main">
+            <textbox id="main" />
+            <button id="selectMainButton" label="&selectBackground.label;"
+                    oncommand="CustomPersonaEditor.onSelectBackground(event)"/>
+            <colorpicker id="selectMainColor" palettename="standard" 
+						 type="button" onchange="CustomPersonaEditor.onSelectColor(event)" />
+          </hbox>
+        </row>
+		<row align="center">
+          <hbox flex="1" pack="end">
             <label control="titlebar" value="&titlebar.label;"/>
           </hbox>
 		  <hbox pref="custom.titlebar">
@@ -77,6 +89,40 @@
             <button id="selectServicePaneButton" label="&selectBackground.label;"
                     oncommand="CustomPersonaEditor.onSelectBackground(event)"/>
             <colorpicker id="selectServicePaneColor" palettename="standard" 
+						 type="button" onchange="CustomPersonaEditor.onSelectColor(event)" />
+          </hbox>
+        </row>
+        <row align="center">
+          <hbox flex="1" pack="end">
+            <label control="servicePaneStatusbar" value="&servicePaneStatusbar.label;"/>
+          </hbox>
+		  <hbox pref="custom.servicePaneStatusbar">
+            <textbox id="servicePaneStatusbar" />
+            <button id="selectServicePaneStatusbarButton" label="&selectBackground.label;"
+                    oncommand="CustomPersonaEditor.onSelectBackground(event)"/>
+            <colorpicker id="selectServicePaneStatusbarColor" palettename="standard" 
+						 type="button" onchange="CustomPersonaEditor.onSelectColor(event)" />
+          </hbox>
+        </row>
+        <row align="center">
+          <hbox flex="1" pack="end">
+            <label control="statusbar" value="&statusbar.label;"/>
+          </hbox>
+		  <hbox pref="custom.statusbar">
+            <textbox id="statusbar" />
+            <button id="selectStatusbarButton" label="&selectBackground.label;"
+                    oncommand="CustomPersonaEditor.onSelectBackground(event)"/>
+            <colorpicker id="selectStatusbarColor" palettename="standard" 
+						 type="button" onchange="CustomPersonaEditor.onSelectColor(event)" />
+          </hbox>
+        </row>
+        <row align="center">
+          <hbox flex="1" pack="end">
+            <label control="titlebarText" value="&titlebarText.label;"/>
+          </hbox>
+		  <hbox pref="custom.titlebarText">
+            <textbox id="titlebarText" />
+            <colorpicker id="selectTitlebarTextColor" palettename="standard" 
 						 type="button" onchange="CustomPersonaEditor.onSelectColor(event)" />
           </hbox>
         </row>
