@@ -28,6 +28,27 @@ let CustomPersonaEditor = {
     return this._servicePane;
   },
   
+  get _dpServicePaneTitlebar() {
+    let dpServicePaneTitlebar = document.getElementById("dpServicePaneTitlebar");
+    delete this._dpServicePaneTitlebar;
+    this._dpServicePaneTitlebar = dpServicePaneTitlebar;
+    return this._dpServicePaneTitlebar;
+  },
+  
+  get _dpContentPaneTitlebar() {
+    let dpContentPaneTitlebar = document.getElementById("dpContentPaneTitlebar");
+    delete this._dpContentPaneTitlebar;
+    this._dpContentPaneTitlebar = dpContentPaneTitlebar;
+    return this._dpContentPaneTitlebar;
+  },
+  
+  get _dpRightSidebarTitlebar() {
+    let dpRightSidebarTitlebar = document.getElementById("dpRightSidebarTitlebar");
+    delete this._dpRightSidebarTitlebar;
+    this._dpRightSidebarTitlebar = dpRightSidebarTitlebar;
+    return this._dpRightSidebarTitlebar;
+  },
+  
   get _titlebar() {
     let titlebar = document.getElementById("titlebar");
     delete this._titlebar;
@@ -98,6 +119,9 @@ let CustomPersonaEditor = {
   init: function() {
     var controlPaneValue = this._getPref("custom.controlPane", "");
 	var servicePaneValue = this._getPref("custom.servicePane", "");
+	var dpServicePaneTitlebarValue = this._getPref("custom.dpServicePaneTitlebar", "");
+	var dpContentPaneTitlebarValue = this._getPref("custom.dpContentPaneTitlebar", "");
+	var dpRightSidebarTitlebarValue = this._getPref("custom.dpRightSidebarTitlebar", "");
 	var titlebarValue = this._getPref("custom.titlebar", "");
 	var navbarValue = this._getPref("custom.navbar", "");
 	var statusbarValue = this._getPref("custom.statusbar", ""); 
@@ -108,12 +132,28 @@ let CustomPersonaEditor = {
 	
     this._controlPane.value = controlPaneValue;
     this._servicePane.value = servicePaneValue;
+    this._dpServicePaneTitlebar.value = dpServicePaneTitlebarValue;
+    this._dpContentPaneTitlebar.value = dpContentPaneTitlebarValue;
+    this._dpRightSidebarTitlebar.value = dpRightSidebarTitlebarValue;
     this._titlebar.value = titlebarValue;
     this._navbar.value = navbarValue;
     this._statusbar.value = statusbarValue;
     this._servicePaneStatusbar.value = servicePaneStatusbarValue;
     this._main.value = mainValue;
     this._titlebarText.value = titlebarTextValue;
+    
+    if (this._isColorValue(controlPaneValue)) document.getElementById("selectcontrolPaneColor").color = controlPaneValue
+    if (this._isColorValue(servicePaneValue)) document.getElementById("selectservicePaneColor").color = servicePaneValue
+    if (this._isColorValue(dpServicePaneTitlebarValue)) document.getElementById("selectdpServicePaneTitlebarColor").color = dpServicePaneTitlebarValue
+    if (this._isColorValue(dpContentPaneTitlebarValue)) document.getElementById("selectdpContentPaneTitlebarColor").color = dpContentPaneTitlebarValue
+    if (this._isColorValue(dpRightSidebarTitlebarValue)) document.getElementById("selectdpRightSidebarTitlebarColor").color = dpRightSidebarTitlebarValue
+    if (this._isColorValue(titlebarValue)) document.getElementById("selecttitlebarColor").color = titlebarValue
+    if (this._isColorValue(navbarValue)) document.getElementById("selectnavbarColor").color = navbarValue
+    if (this._isColorValue(statusbarValue)) document.getElementById("selectstatusbarColor").color = statusbarValue
+    if (this._isColorValue(servicePaneStatusbarValue)) document.getElementById("selectservicePaneStatusbarColor").color = servicePaneStatusbarValue
+    if (this._isColorValue(mainValue)) document.getElementById("selectmainColor").color = mainValue
+    if (this._isColorValue(titlebarTextValue)) document.getElementById("selecttitlebarTextColor").color = titlebarTextValue
+	
   },
 
 
@@ -150,6 +190,9 @@ let CustomPersonaEditor = {
   onApply: function() {
 	let controlPaneValue = this._controlPane.value;
 	let servicePaneValue = this._servicePane.value;
+	let dpServicePaneTitlebarValue = this._dpServicePaneTitlebar.value;
+	let dpContentPaneTitlebarValue = this._dpContentPaneTitlebar.value;
+	let dpRightSidebarTitlebarValue = this._dpRightSidebarTitlebar.value;
 	let titlebarValue = this._titlebar.value;
 	let navbarValue = this._navbar.value;
 	let statusbarValue = this._statusbar.value;
@@ -160,6 +203,9 @@ let CustomPersonaEditor = {
 	this._prefSvc.setCharPref("custom.controlPane", controlPaneValue);
 	this._prefSvc.setCharPref("custom.servicePane", servicePaneValue);
 	this._prefSvc.setCharPref("custom.titlebar", titlebarValue);
+	this._prefSvc.setCharPref("custom.dpServicePaneTitlebar", dpServicePaneTitlebarValue);
+	this._prefSvc.setCharPref("custom.dpContentPaneTitlebar", dpContentPaneTitlebarValue);
+	this._prefSvc.setCharPref("custom.dpRightSidebarTitlebar", dpRightSidebarTitlebarValue);
 	this._prefSvc.setCharPref("custom.navbar", navbarValue);
 	this._prefSvc.setCharPref("custom.statusbar", statusbarValue);
 	this._prefSvc.setCharPref("custom.servicePaneStatusbar", servicePaneStatusbarValue);
@@ -176,6 +222,9 @@ let CustomPersonaEditor = {
 	var controlPaneStyle = this._createBackgroundStyle(this._controlPane.value);
 	var servicePaneStyle = this._createBackgroundStyle(this._servicePane.value);
 	var titlebarStyle = this._createBackgroundStyle(this._titlebar.value);
+	var dpServicePaneTitlebarStyle = this._createBackgroundStyle(this._dpServicePaneTitlebar.value);
+	var dpContentPaneTitlebarStyle = this._createBackgroundStyle(this._dpContentPaneTitlebar.value);
+	var dpRightSidebarTitlebarStyle = this._createBackgroundStyle(this._dpRightSidebarTitlebar.value);
 	var navbarStyle = this._createBackgroundStyle(this._navbar.value);
 	var statusbarStyle = this._createBackgroundStyle(this._statusbar.value);
 	var servicePaneStatusbarStyle = this._createBackgroundStyle(this._servicePaneStatusbar.value);
@@ -192,17 +241,32 @@ let CustomPersonaEditor = {
 	if (servicePaneStyle != emptyStyle)
 		cssRules[rule_index++] = "#sb_servicepane { " + servicePaneStyle + " }";
 	if (titlebarStyle != emptyStyle)
-		cssRules[rule_index++] = "#sb-sys-titlebar, #main-menubar  { " + titlebarStyle + " }";
+		cssRules[rule_index++] = "#sb-sys-titlebar, #main-menubar { " + titlebarStyle + " }";
+	if (dpServicePaneTitlebarStyle != emptyStyle)
+		cssRules[rule_index++] = "#displaypane_servicepane_bottom .sb-displaypane-header  { " + dpServicePaneTitlebarStyle + " }";
+	if (dpContentPaneTitlebarStyle != emptyStyle)
+		cssRules[rule_index++] = "#displaypane_contentpane_bottom .sb-displaypane-header  { " + dpContentPaneTitlebarStyle + " }";
+	if (dpRightSidebarTitlebarStyle != emptyStyle)
+		cssRules[rule_index++] = "#displaypane_right_sidebar .sb-displaypane-header  { " + dpRightSidebarTitlebarStyle + " }";
 	if (navbarStyle != emptyStyle)
 		cssRules[rule_index++] = "#nav-bar { " + navbarStyle + " }";
 	if (statusbarStyle != emptyStyle)
 		cssRules[rule_index++] = "#status-bar { " + statusbarStyle + " }";
+	
+	/* tabstrip
+	if (controlPaneStyle != emptyStyle)
+		cssRules[rule_index++] = ".tabbrowser-tab hbox, .tab-close-button { " + controlPaneStyle + " }";     
+	if (servicePaneStatusbarStyle != emptyStyle)
+		cssRules[rule_index++] = "#tabstrip .scrollbox-innerbox { " + servicePaneStatusbarStyle + " }";
+	
+	end tabstrip */
+		
 	if (servicePaneStatusbarStyle != emptyStyle)
 		cssRules[rule_index++] = "#servicepane-status-bar { " + servicePaneStatusbarStyle + " }";
 	if (mainStyle != emptyStyle)
 		cssRules[rule_index++] = "#mainplayer { " + mainStyle + " }";
 	if (titlebarTextStyle)
-		cssRules[rule_index++] = "#sb-sys-title-title, .menubar-text { color: " + titlebarTextStyle + " !important; }";
+		cssRules[rule_index++] = "#sb-sys-title-title, .menubar-text, #displaypane_servicepane_bottom .sb-displaypane-label, #displaypane_contentpane_bottom .sb-displaypane-label, #displaypane_right_sidebar .sb-displaypane-label, #status-bar label, #sb_servicepane_treepane .servicepane-tree, .tabbrowser-tab label { color: " + titlebarTextStyle + " !important; }";
 	 
 			
 	styleSheetUtility.deleteAllRules();
@@ -211,14 +275,19 @@ let CustomPersonaEditor = {
   },
   
   _createBackgroundStyle: function(input) {
-	if (/^#?[0-9AaBbCcDdEeFf]{3,6}$/.test(input) || /^rgb\(\s*\d+\s*,\s*\d+\s*,\s*\d+\s*\)$/.test(input) )
+	if (this._isColorValue(input))
 		//the value is a color
 		return "background-color: " + input + "!important; background-image: none !important;";
 	else
 		return "background-image: url(" + input + ") !important; background-color: transparent !important;";
+  },
+  
+  _isColorValue: function(text) {
+	if (/^#?[0-9AaBbCcDdEeFf]{3,6}$/.test(text) || /^rgb\(\s*\d+\s*,\s*\d+\s*,\s*\d+\s*\)$/.test(text) )
+		return true;
+	else
+		return false;
   }
-  
-  
 };
 
 window.addEventListener("load", function() { CustomPersonaEditor.init() }, false);
