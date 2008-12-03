@@ -54,6 +54,9 @@ let PersonaController = {
     var controlPaneStyle = this._createBackgroundStyle(this._getPref("custom.controlPane", ""));
 	var servicePaneStyle = this._createBackgroundStyle(this._getPref("custom.servicePane", ""));
     var titlebarStyle = this._createBackgroundStyle(this._getPref("custom.titlebar", ""));
+    var dpServicePaneTitlebarStyle = this._createBackgroundStyle(this._getPref("custom.dpServicePaneTitlebarValue", ""));
+	var dpContentPaneTitlebarStyle = this._createBackgroundStyle(this._getPref("custom.dpContentPaneTitlebar", ""));
+	var dpRightSidebarTitlebarStyle = this._createBackgroundStyle(this._getPref("custom.dpRightSidebarTitlebarValue", ""));
 	var navbarStyle = this._createBackgroundStyle(this._getPref("custom.navbar", ""));
 	var statusbarStyle = this._createBackgroundStyle(this._getPref("custom.statusbar", ""));
 	var servicePaneStatusbarStyle = this._createBackgroundStyle(this._getPref("custom.servicePaneStatusbar", ""));
@@ -70,7 +73,13 @@ let PersonaController = {
 	if (servicePaneStyle != emptyStyle)
 		cssRules[rule_index++] = "#sb_servicepane { " + servicePaneStyle + " }";
 	if (titlebarStyle != emptyStyle)
-		cssRules[rule_index++] = "#sb-sys-titlebar, #main-menubar  { " + titlebarStyle + " }";
+		cssRules[rule_index++] = "#sb-sys-titlebar, #main-menubar { " + titlebarStyle + " }";
+	if (dpServicePaneTitlebarStyle != emptyStyle)
+		cssRules[rule_index++] = "#displaypane_servicepane_bottom .sb-displaypane-header  { " + dpServicePaneTitlebarStyle + " }";
+	if (dpContentPaneTitlebarStyle != emptyStyle)
+		cssRules[rule_index++] = "#displaypane_contentpane_bottom .sb-displaypane-header  { " + dpContentPaneTitlebarStyle + " }";
+	if (dpRightSidebarTitlebarStyle != emptyStyle)
+		cssRules[rule_index++] = "#displaypane_right_sidebar .sb-displaypane-header  { " + dpRightSidebarTitlebarStyle + " }";
 	if (navbarStyle != emptyStyle)
 		cssRules[rule_index++] = "#nav-bar { " + navbarStyle + " }";
 	if (statusbarStyle != emptyStyle)
@@ -78,9 +87,9 @@ let PersonaController = {
 	if (servicePaneStatusbarStyle != emptyStyle)
 		cssRules[rule_index++] = "#servicepane-status-bar { " + servicePaneStatusbarStyle + " }";
 	if (mainStyle != emptyStyle)
-		cssRules[rule_index++] = "#mainplayer { " + mainStyle + " }";
+		cssRules[rule_index++] = "#mainplayer, #displaypane_contentpane_bottom browser { " + mainStyle + " }";
 	if (titlebarTextStyle)
-		cssRules[rule_index++] = "#sb-sys-title-title, .menubar-text { color: " + titlebarTextStyle + " !important; }";
+		cssRules[rule_index++] = "#sb-sys-title-title, .menubar-text, #displaypane_servicepane_bottom .sb-displaypane-label, #displaypane_contentpane_bottom .sb-displaypane-label, #displaypane_right_sidebar .sb-displaypane-label, #status-bar label { color: " + titlebarTextStyle + " !important; }";
 			
 	styleSheetUtility.deleteAllRules();
 	styleSheetUtility.insertAllRules(cssRules);

@@ -40,7 +40,7 @@
             <textbox id="main" />
             <button id="selectMainButton" label="&selectBackground.label;"
                     oncommand="CustomPersonaEditor.onSelectBackground(event)"/>
-            <colorpicker id="selectMainColor" palettename="standard" 
+            <colorpicker id="selectmainColor" palettename="standard" 
 						 type="button" onchange="CustomPersonaEditor.onSelectColor(event)" />
           </hbox>
         </row>
@@ -52,7 +52,43 @@
             <textbox id="titlebar" />
             <button id="selectTitlebarButton" label="&selectBackground.label;"
                     oncommand="CustomPersonaEditor.onSelectBackground(event)"/>
-            <colorpicker id="selectTitlebarColor" palettename="standard" 
+            <colorpicker id="selecttitlebarColor" palettename="standard" 
+						 type="button" onchange="CustomPersonaEditor.onSelectColor(event)" />
+          </hbox>
+        </row>
+        <row align="center">
+          <hbox flex="1" pack="end">
+            <label control="dpServicePaneTitlebar" value="&dpServicePaneTitlebar.label;"/>
+          </hbox>
+		  <hbox pref="custom.dpServicePaneTitlebar">
+            <textbox id="dpServicePaneTitlebar" />
+            <button id="selectDpServicePaneTitlebarButton" label="&selectBackground.label;"
+                    oncommand="CustomPersonaEditor.onSelectBackground(event)"/>
+            <colorpicker id="selectdpServicePaneTitlebarColor" palettename="standard" 
+						 type="button" onchange="CustomPersonaEditor.onSelectColor(event)" />
+          </hbox>
+        </row>
+        <row align="center">
+          <hbox flex="1" pack="end">
+            <label control="dpContentPaneTitlebar" value="&dpContentPaneTitlebar.label;"/>
+          </hbox>
+		  <hbox pref="custom.dpContentPaneTitlebar">
+            <textbox id="dpContentPaneTitlebar" />
+            <button id="selectDpContentPaneTitlebarButton" label="&selectBackground.label;"
+                    oncommand="CustomPersonaEditor.onSelectBackground(event)"/>
+            <colorpicker id="selectdpContentPaneTitlebarColor" palettename="standard" 
+						 type="button" onchange="CustomPersonaEditor.onSelectColor(event)" />
+          </hbox>
+        </row>
+        <row align="center">
+          <hbox flex="1" pack="end">
+            <label control="dpRightSidebarTitlebar" value="&dpRightSidebarTitlebar.label;"/>
+          </hbox>
+		  <hbox pref="custom.dpRightSidebarTitlebar">
+            <textbox id="dpRightSidebarTitlebar" />
+            <button id="selectDpRightSidebarTitlebarButton" label="&selectBackground.label;"
+                    oncommand="CustomPersonaEditor.onSelectBackground(event)"/>
+            <colorpicker id="selectdpRightSidebarTitlebarColor" palettename="standard" 
 						 type="button" onchange="CustomPersonaEditor.onSelectColor(event)" />
           </hbox>
         </row>
@@ -64,7 +100,7 @@
             <textbox id="navbar" />
             <button id="selectNavbarButton" label="&selectBackground.label;"
                     oncommand="CustomPersonaEditor.onSelectBackground(event)"/>
-            <colorpicker id="selectNavbarColor" palettename="standard" 
+            <colorpicker id="selectnavbarColor" palettename="standard" 
 						 type="button" onchange="CustomPersonaEditor.onSelectColor(event)" />
           </hbox>
         </row>
@@ -76,7 +112,7 @@
             <textbox id="controlPane" />
             <button id="selectControlPaneButton" label="&selectBackground.label;"
                     oncommand="CustomPersonaEditor.onSelectBackground(event)"/>
-            <colorpicker id="selectControlPaneColor" palettename="standard" 
+            <colorpicker id="selectcontrolPaneColor" palettename="standard" 
 						 type="button" onchange="CustomPersonaEditor.onSelectColor(event)" />
           </hbox>
         </row>
@@ -88,7 +124,7 @@
             <textbox id="servicePane" />
             <button id="selectServicePaneButton" label="&selectBackground.label;"
                     oncommand="CustomPersonaEditor.onSelectBackground(event)"/>
-            <colorpicker id="selectServicePaneColor" palettename="standard" 
+            <colorpicker id="selectservicePaneColor" palettename="standard" 
 						 type="button" onchange="CustomPersonaEditor.onSelectColor(event)" />
           </hbox>
         </row>
@@ -100,7 +136,7 @@
             <textbox id="servicePaneStatusbar" />
             <button id="selectServicePaneStatusbarButton" label="&selectBackground.label;"
                     oncommand="CustomPersonaEditor.onSelectBackground(event)"/>
-            <colorpicker id="selectServicePaneStatusbarColor" palettename="standard" 
+            <colorpicker id="selectservicePaneStatusbarColor" palettename="standard" 
 						 type="button" onchange="CustomPersonaEditor.onSelectColor(event)" />
           </hbox>
         </row>
@@ -112,7 +148,7 @@
             <textbox id="statusbar" />
             <button id="selectStatusbarButton" label="&selectBackground.label;"
                     oncommand="CustomPersonaEditor.onSelectBackground(event)"/>
-            <colorpicker id="selectStatusbarColor" palettename="standard" 
+            <colorpicker id="selectstatusbarColor" palettename="standard" 
 						 type="button" onchange="CustomPersonaEditor.onSelectColor(event)" />
           </hbox>
         </row>
@@ -122,7 +158,7 @@
           </hbox>
 		  <hbox pref="custom.titlebarText">
             <textbox id="titlebarText" />
-            <colorpicker id="selectTitlebarTextColor" palettename="standard" 
+            <colorpicker id="selecttitlebarTextColor" palettename="standard" 
 						 type="button" onchange="CustomPersonaEditor.onSelectColor(event)" />
           </hbox>
         </row>

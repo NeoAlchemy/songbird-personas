@@ -5,14 +5,17 @@
 
 <!ENTITY customPersona.label      "Custom Persona">
 
-<!ENTITY main.label        			"Outside Edge:">
-<!ENTITY controlPane.label        	"Control Pane:">
-<!ENTITY servicePane.label        	"Service Pane:">
-<!ENTITY titlebar.label           	"Top Bar:">
-<!ENTITY titlebarText.label         "Text for Top Bar:">
-<!ENTITY navbar.label             	"Navigation Bar:">
-<!ENTITY statusbar.label          	"Status Bar:">
-<!ENTITY servicePaneStatusbar.label "Service Pane's Status Bar:">
+<!ENTITY main.label        				"Outside Edge:">
+<!ENTITY controlPane.label        		"Control Pane:">
+<!ENTITY servicePane.label        		"Service Pane:">
+<!ENTITY titlebar.label           		"Top Bar:">
+<!ENTITY dpServicePaneTitlebar.label    "Bottom Service Pane Top Bar:">
+<!ENTITY dpContentPaneTitlebar.label    "Bottom Content Pane Top Bar:">
+<!ENTITY dpRightSidebarTitlebar.label   "Right Sidebar Top Bar:">
+<!ENTITY titlebarText.label         	"Text for Top Bar:">
+<!ENTITY navbar.label             		"Navigation Bar:">
+<!ENTITY statusbar.label          		"Status Bar:">
+<!ENTITY servicePaneStatusbar.label 	"Service Pane's Status Bar:">
 
 <!ENTITY selectBackground.label     "Browse...">
 <!ENTITY closeButton.label          "Close">
