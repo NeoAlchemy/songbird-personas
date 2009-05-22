@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?xml-stylesheet href="chrome://personas/content/personas.css" type="text/css"?>
 <?xml-stylesheet href="chrome://personas/skin/personas.css" type="text/css"?>
-<?xml-stylesheet href="chrome://personas/content/textColor.css" type="text/css"?>
 
 <!DOCTYPE overlay SYSTEM "chrome://personas/locale/personas.dtd">
 <overlay id="personas-overlay"
@@ -19,6 +17,9 @@
        <menupopup id="personas-selector-menu"
                   onpopupshowing="if (event.target == this) PersonaController.onPersonaPopupShowing(event)"
                   onpopuphiding="if (event.target == this) PersonaController.onMenuPopupHiding();">
+        <menuitem id="persona-current" label="" />
+        <menuseparator id="personas-opening-separator"/>
+        <menuseparator id="personas-closing-separator"/>
         <menuitem label="&useDefaultPersona.label;" personaid="default"
                   oncommand="PersonaController.onSelectDefault(event)"/>
         <menuseparator/>
@@ -30,7 +31,7 @@
 
   <statusbar id="status-bar">
     <statusbarpanel id="personas-selector-button" class="statusbarpanel-menu-iconic"
-					src="chrome://personas/content/personas_16x16.png"
+					src="chrome://personas/skin/personas_16x16.png"
                     insertbefore="statusbar-display" onmousedown="PersonaController.onMenuButtonMouseDown();">
 	</statusbarpanel>
   </statusbar>

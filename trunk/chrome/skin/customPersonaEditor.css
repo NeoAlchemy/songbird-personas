@@ -2,7 +2,7 @@
 window {
   -moz-appearance: none;
   background-color: transparent;
-  background-image: url('chrome://personas/content/background.jpg');
+  background-image: url('chrome://personas/skin/background.jpg');
   color: -moz-dialogtext;
   font: message-box;
 }
@@ -11,7 +11,6 @@ window {
 #form {
   border: 1px solid threedshadow;
   padding: 3em;
-  -moz-border-radius: 10px;
   background-color: -moz-field;
   color: -moz-fieldtext;
 }

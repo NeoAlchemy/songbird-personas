@@ -90,6 +90,22 @@ let CustomPersonaEditor = {
     this._main = main;
     return this._main;
   },
+  
+  get _saveName() {
+    let saveName = document.getElementById("saveName");
+    delete this._saveName;
+    this._saveName = saveName;
+    return this._saveName;
+  },
+  
+  get _importSpace() {
+    let importSpace = document.getElementById("importSpace");
+    delete this._importSpace;
+    this._importSpace = importSpace;
+    return this._importSpace;
+  },
+  
+  //TODO:: create getter setters for import, export
 
   // Preference Service
   get _prefSvc() {
@@ -99,6 +115,14 @@ let CustomPersonaEditor = {
     delete this._prefSvc;
     this._prefSvc = prefSvc;
     return this._prefSvc;
+  },
+  
+  get _logger() {
+    var ConsoleService = Cc["@mozilla.org/consoleservice;1"].
+                    getService(Ci.nsIConsoleService);
+    delete this._logger;
+    this._logger = ConsoleService
+    return this._logger;
   },
 
   get _prefCache() {
@@ -117,43 +141,36 @@ let CustomPersonaEditor = {
   // Initialization
 
   init: function() {
-    var controlPaneValue = this._getPref("custom.controlPane", "");
-	var servicePaneValue = this._getPref("custom.servicePane", "");
-	var dpServicePaneTitlebarValue = this._getPref("custom.dpServicePaneTitlebar", "");
-	var dpContentPaneTitlebarValue = this._getPref("custom.dpContentPaneTitlebar", "");
-	var dpRightSidebarTitlebarValue = this._getPref("custom.dpRightSidebarTitlebar", "");
-	var titlebarValue = this._getPref("custom.titlebar", "");
-	var navbarValue = this._getPref("custom.navbar", "");
-	var statusbarValue = this._getPref("custom.statusbar", ""); 
-	var servicePaneStatusbarValue = this._getPref("custom.servicePaneStatusbar", "");
-	var mainValue = this._getPref("custom.main", ""); 
-	var titlebarTextValue = this._getPref("custom.titlebarText", "");
-	
-	
-    this._controlPane.value = controlPaneValue;
-    this._servicePane.value = servicePaneValue;
-    this._dpServicePaneTitlebar.value = dpServicePaneTitlebarValue;
-    this._dpContentPaneTitlebar.value = dpContentPaneTitlebarValue;
-    this._dpRightSidebarTitlebar.value = dpRightSidebarTitlebarValue;
-    this._titlebar.value = titlebarValue;
-    this._navbar.value = navbarValue;
-    this._statusbar.value = statusbarValue;
-    this._servicePaneStatusbar.value = servicePaneStatusbarValue;
-    this._main.value = mainValue;
-    this._titlebarText.value = titlebarTextValue;
+    let selectedPersona = this._getPref("settings.selected", "default");
+    if (selectedPersona != "default") {
+      var customObj = JSON.fromString(selectedPersona);
+      
+      this._controlPane.value = customObj.controlPane;
+      this._servicePane.value = customObj.servicePane;
+      this._dpServicePaneTitlebar.value = customObj.dpServicePaneTitlebar;
+      this._dpContentPaneTitlebar.value = customObj.dpContentPaneTitlebar;
+      this._dpRightSidebarTitlebar.value = customObj.dpRightSidebarTitlebar;
+      this._titlebar.value = customObj.titlebar;
+      this._navbar.value = customObj.navbar;
+      this._statusbar.value = customObj.statusbar;
+      this._servicePaneStatusbar.value = customObj.servicePaneStatusbar;
+      this._main.value = customObj.main;
+      this._titlebarText.value = customObj.titlebarText;
+      
+     
+      if (this._isColorValue(customObj.controlPane)) document.getElementById("selectcontrolPaneColor").color = customObj.controlPane
+      if (this._isColorValue(customObj.servicePane)) document.getElementById("selectservicePaneColor").color = customObj.servicePane
+      if (this._isColorValue(customObj.dpServicePaneTitlebar)) document.getElementById("selectdpServicePaneTitlebarColor").color = customObj.dpServicePaneTitlebar
+      if (this._isColorValue(customObj.dpContentPaneTitlebar)) document.getElementById("selectdpContentPaneTitlebarColor").color = customObj.dpContentPaneTitlebar
+      if (this._isColorValue(customObj.dpRightSidebarTitlebar)) document.getElementById("selectdpRightSidebarTitlebarColor").color = customObj.dpRightSidebarTitlebar
+      if (this._isColorValue(customObj.titlebar)) document.getElementById("selecttitlebarColor").color = customObj.titlebar
+      if (this._isColorValue(customObj.navbar)) document.getElementById("selectnavbarColor").color = customObj.navbar
+      if (this._isColorValue(customObj.statusbar)) document.getElementById("selectstatusbarColor").color = customObj.statusbar
+      if (this._isColorValue(customObj.servicePaneStatusbar)) document.getElementById("selectservicePaneStatusbarColor").color = customObj.servicePaneStatusbar
+      if (this._isColorValue(customObj.main)) document.getElementById("selectmainColor").color = customObj.main
+      if (this._isColorValue(customObj.titlebarText)) document.getElementById("selecttitlebarTextColor").color = customObj.titlebarText
+    }
     
-    if (this._isColorValue(controlPaneValue)) document.getElementById("selectcontrolPaneColor").color = controlPaneValue
-    if (this._isColorValue(servicePaneValue)) document.getElementById("selectservicePaneColor").color = servicePaneValue
-    if (this._isColorValue(dpServicePaneTitlebarValue)) document.getElementById("selectdpServicePaneTitlebarColor").color = dpServicePaneTitlebarValue
-    if (this._isColorValue(dpContentPaneTitlebarValue)) document.getElementById("selectdpContentPaneTitlebarColor").color = dpContentPaneTitlebarValue
-    if (this._isColorValue(dpRightSidebarTitlebarValue)) document.getElementById("selectdpRightSidebarTitlebarColor").color = dpRightSidebarTitlebarValue
-    if (this._isColorValue(titlebarValue)) document.getElementById("selecttitlebarColor").color = titlebarValue
-    if (this._isColorValue(navbarValue)) document.getElementById("selectnavbarColor").color = navbarValue
-    if (this._isColorValue(statusbarValue)) document.getElementById("selectstatusbarColor").color = statusbarValue
-    if (this._isColorValue(servicePaneStatusbarValue)) document.getElementById("selectservicePaneStatusbarColor").color = servicePaneStatusbarValue
-    if (this._isColorValue(mainValue)) document.getElementById("selectmainColor").color = mainValue
-    if (this._isColorValue(titlebarTextValue)) document.getElementById("selecttitlebarTextColor").color = titlebarTextValue
-	
   },
 
 
@@ -184,93 +201,137 @@ let CustomPersonaEditor = {
 
   onClose: function() {
     styleSheetUtility.deleteAllRules();
-	window.close();
-  },
-
-  onApply: function() {
-	let controlPaneValue = this._controlPane.value;
-	let servicePaneValue = this._servicePane.value;
-	let dpServicePaneTitlebarValue = this._dpServicePaneTitlebar.value;
-	let dpContentPaneTitlebarValue = this._dpContentPaneTitlebar.value;
-	let dpRightSidebarTitlebarValue = this._dpRightSidebarTitlebar.value;
-	let titlebarValue = this._titlebar.value;
-	let navbarValue = this._navbar.value;
-	let statusbarValue = this._statusbar.value;
-	let servicePaneStatusbarValue = this._servicePaneStatusbar.value;
-	let mainValue = this._main.value;
-	let titlebarTextValue = this._titlebarText.value;
-	
-	this._prefSvc.setCharPref("custom.controlPane", controlPaneValue);
-	this._prefSvc.setCharPref("custom.servicePane", servicePaneValue);
-	this._prefSvc.setCharPref("custom.titlebar", titlebarValue);
-	this._prefSvc.setCharPref("custom.dpServicePaneTitlebar", dpServicePaneTitlebarValue);
-	this._prefSvc.setCharPref("custom.dpContentPaneTitlebar", dpContentPaneTitlebarValue);
-	this._prefSvc.setCharPref("custom.dpRightSidebarTitlebar", dpRightSidebarTitlebarValue);
-	this._prefSvc.setCharPref("custom.navbar", navbarValue);
-	this._prefSvc.setCharPref("custom.statusbar", statusbarValue);
-	this._prefSvc.setCharPref("custom.servicePaneStatusbar", servicePaneStatusbarValue);
-	this._prefSvc.setCharPref("custom.main", mainValue);
-	this._prefSvc.setCharPref("custom.titlebarText", titlebarTextValue);
-	
-	this.onPreview()
-	
-	this._prefSvc.setCharPref("selected", "manual");
     window.close();
   },
   
+  onImport: function() {
+    var importElementBox = document.getElementById("importElements");
+    importElementBox.setAttribute("hidden", "false");
+  },
+  
+  onCancelConfirmImport: function() {
+    var importElementBox = document.getElementById("importElements");
+    importElementBox.setAttribute("hidden", "true");
+  },
+  
+  onConfirmImport: function() {
+    let selectedPersona = this._importSpace.value
+    if (selectedPersona != "default") {
+      var customObj = JSON.fromString(selectedPersona);
+      
+      this._controlPane.value = customObj.controlPane;
+      this._servicePane.value = customObj.servicePane;
+      this._dpServicePaneTitlebar.value = customObj.dpServicePaneTitlebar;
+      this._dpContentPaneTitlebar.value = customObj.dpContentPaneTitlebar;
+      this._dpRightSidebarTitlebar.value = customObj.dpRightSidebarTitlebar;
+      this._titlebar.value = customObj.titlebar;
+      this._navbar.value = customObj.navbar;
+      this._statusbar.value = customObj.statusbar;
+      this._servicePaneStatusbar.value = customObj.servicePaneStatusbar;
+      this._main.value = customObj.main;
+      this._titlebarText.value = customObj.titlebarText;
+      
+     
+      if (this._isColorValue(customObj.controlPane)) document.getElementById("selectcontrolPaneColor").color = customObj.controlPane
+      if (this._isColorValue(customObj.servicePane)) document.getElementById("selectservicePaneColor").color = customObj.servicePane
+      if (this._isColorValue(customObj.dpServicePaneTitlebar)) document.getElementById("selectdpServicePaneTitlebarColor").color = customObj.dpServicePaneTitlebar
+      if (this._isColorValue(customObj.dpContentPaneTitlebar)) document.getElementById("selectdpContentPaneTitlebarColor").color = customObj.dpContentPaneTitlebar
+      if (this._isColorValue(customObj.dpRightSidebarTitlebar)) document.getElementById("selectdpRightSidebarTitlebarColor").color = customObj.dpRightSidebarTitlebar
+      if (this._isColorValue(customObj.titlebar)) document.getElementById("selecttitlebarColor").color = customObj.titlebar
+      if (this._isColorValue(customObj.navbar)) document.getElementById("selectnavbarColor").color = customObj.navbar
+      if (this._isColorValue(customObj.statusbar)) document.getElementById("selectstatusbarColor").color = customObj.statusbar
+      if (this._isColorValue(customObj.servicePaneStatusbar)) document.getElementById("selectservicePaneStatusbarColor").color = customObj.servicePaneStatusbar
+      if (this._isColorValue(customObj.main)) document.getElementById("selectmainColor").color = customObj.main
+      if (this._isColorValue(customObj.titlebarText)) document.getElementById("selecttitlebarTextColor").color = customObj.titlebarText
+    }
+    
+    var importLabel = document.getElementById("importLabel");
+    var confirmImportButton = document.getElementById("okConfirmImport");
+    importLabel.setAttribute("hidden", "true");
+    confirmImportButton.setAttribute("hidden", "true");
+    this._importSpace.setAttribute("hidden", "true");
+  },
+  
+  onSave: function() {
+    var saveElementBox = document.getElementById("saveElements");
+    saveElementBox.setAttribute("hidden", "false");
+  },
+
+  onConfirmSave: function() {
+    var customObject = this._createJSONObject()
+    
+    this._prefSvc.setCharPref("feather."+customObject.id, JSON.toString(customObject));
+    this._prefSvc.setCharPref("settings.selected", JSON.toString(customObject));
+    
+    this.onPreview()
+    window.close();
+  },
+  
+  onCancelConfirmSave: function() {
+    var saveElementBox = document.getElementById("saveElements");
+    saveElementBox.setAttribute("hidden", "true");
+  },
+  
+  onExport: function() {
+    var objectString = JSON.toString(this._createJSONObject());
+    alert(objectString.replace(/:/g, " : "));
+  },
+  
   onPreview: function() {
-	var controlPaneStyle = this._createBackgroundStyle(this._controlPane.value);
-	var servicePaneStyle = this._createBackgroundStyle(this._servicePane.value);
-	var titlebarStyle = this._createBackgroundStyle(this._titlebar.value);
-	var dpServicePaneTitlebarStyle = this._createBackgroundStyle(this._dpServicePaneTitlebar.value);
-	var dpContentPaneTitlebarStyle = this._createBackgroundStyle(this._dpContentPaneTitlebar.value);
-	var dpRightSidebarTitlebarStyle = this._createBackgroundStyle(this._dpRightSidebarTitlebar.value);
-	var navbarStyle = this._createBackgroundStyle(this._navbar.value);
-	var statusbarStyle = this._createBackgroundStyle(this._statusbar.value);
-	var servicePaneStatusbarStyle = this._createBackgroundStyle(this._servicePaneStatusbar.value);
-	var mainStyle = this._createBackgroundStyle(this._main.value);
-	
-	var titlebarTextStyle = this._titlebarText.value;
-	
-	var emptyStyle = this._createBackgroundStyle("");
-	
-	var rule_index = 0;
-	var cssRules = new Array();
-	if (controlPaneStyle != emptyStyle)
-		cssRules[rule_index++] = "#control_pane, #control_pane_box { " + controlPaneStyle + " }"; 
-	if (servicePaneStyle != emptyStyle)
-		cssRules[rule_index++] = "#sb_servicepane { " + servicePaneStyle + " }";
-	if (titlebarStyle != emptyStyle)
-		cssRules[rule_index++] = "#sb-sys-titlebar, #main-menubar { " + titlebarStyle + " }";
-	if (dpServicePaneTitlebarStyle != emptyStyle)
-		cssRules[rule_index++] = "#displaypane_servicepane_bottom .sb-displaypane-header  { " + dpServicePaneTitlebarStyle + " }";
-	if (dpContentPaneTitlebarStyle != emptyStyle)
-		cssRules[rule_index++] = "#displaypane_contentpane_bottom .sb-displaypane-header  { " + dpContentPaneTitlebarStyle + " }";
-	if (dpRightSidebarTitlebarStyle != emptyStyle)
-		cssRules[rule_index++] = "#displaypane_right_sidebar .sb-displaypane-header  { " + dpRightSidebarTitlebarStyle + " }";
-	if (navbarStyle != emptyStyle)
-		cssRules[rule_index++] = "#nav-bar { " + navbarStyle + " }";
-	if (statusbarStyle != emptyStyle)
-		cssRules[rule_index++] = "#status-bar { " + statusbarStyle + " }";
-	
-	/* tabstrip
-	if (controlPaneStyle != emptyStyle)
-		cssRules[rule_index++] = ".tabbrowser-tab hbox, .tab-close-button { " + controlPaneStyle + " }";     
-	if (servicePaneStatusbarStyle != emptyStyle)
-		cssRules[rule_index++] = "#tabstrip .scrollbox-innerbox { " + servicePaneStatusbarStyle + " }";
-	
-	end tabstrip */
-		
-	if (servicePaneStatusbarStyle != emptyStyle)
-		cssRules[rule_index++] = "#servicepane-status-bar { " + servicePaneStatusbarStyle + " }";
-	if (mainStyle != emptyStyle)
-		cssRules[rule_index++] = "#mainplayer { " + mainStyle + " }";
-	if (titlebarTextStyle)
-		cssRules[rule_index++] = "#sb-sys-title-title, .menubar-text, #displaypane_servicepane_bottom .sb-displaypane-label, #displaypane_contentpane_bottom .sb-displaypane-label, #displaypane_right_sidebar .sb-displaypane-label, #status-bar label, #sb_servicepane_treepane .servicepane-tree, .tabbrowser-tab label { color: " + titlebarTextStyle + " !important; }";
-	 
-			
-	styleSheetUtility.deleteAllRules();
-	styleSheetUtility.insertAllRules(cssRules);
+    var controlPaneStyle = this._createBackgroundStyle(this._controlPane.value);
+    var servicePaneStyle = this._createBackgroundStyle(this._servicePane.value);
+    var titlebarStyle = this._createBackgroundStyle(this._titlebar.value);
+    var dpServicePaneTitlebarStyle = this._createBackgroundStyle(this._dpServicePaneTitlebar.value);
+    var dpContentPaneTitlebarStyle = this._createBackgroundStyle(this._dpContentPaneTitlebar.value);
+    var dpRightSidebarTitlebarStyle = this._createBackgroundStyle(this._dpRightSidebarTitlebar.value);
+    var navbarStyle = this._createBackgroundStyle(this._navbar.value);
+    var statusbarStyle = this._createBackgroundStyle(this._statusbar.value);
+    var servicePaneStatusbarStyle = this._createBackgroundStyle(this._servicePaneStatusbar.value);
+    var mainStyle = this._createBackgroundStyle(this._main.value);
+    
+    var titlebarTextStyle = this._titlebarText.value;
+    
+    var emptyStyle = this._createBackgroundStyle("");
+    
+    var rule_index = 0;
+    var cssRules = new Array();
+    if (controlPaneStyle != emptyStyle)
+      cssRules[rule_index++] = "#control_pane, #control_pane_box { " + controlPaneStyle + " }"; 
+    if (servicePaneStyle != emptyStyle)
+      cssRules[rule_index++] = "#sb_servicepane { " + servicePaneStyle + " }";
+    if (titlebarStyle != emptyStyle)
+      cssRules[rule_index++] = "#sb-sys-titlebar, #main-menubar { " + titlebarStyle + " }";
+    if (dpServicePaneTitlebarStyle != emptyStyle)
+      cssRules[rule_index++] = "#displaypane_servicepane_bottom .sb-displaypane-header  { " + dpServicePaneTitlebarStyle + " }";
+    if (dpContentPaneTitlebarStyle != emptyStyle)
+      cssRules[rule_index++] = "#displaypane_contentpane_bottom .sb-displaypane-header  { " + dpContentPaneTitlebarStyle + " }";
+    if (dpRightSidebarTitlebarStyle != emptyStyle)
+      cssRules[rule_index++] = "#displaypane_right_sidebar .sb-displaypane-header  { " + dpRightSidebarTitlebarStyle + " }";
+    if (navbarStyle != emptyStyle)
+      cssRules[rule_index++] = "#nav-bar { " + navbarStyle + " }";
+    if (statusbarStyle != emptyStyle)
+      cssRules[rule_index++] = "#status-bar { " + statusbarStyle + " }";
+    
+    /* tabstrip 
+    if (controlPaneStyle != emptyStyle)
+      cssRules[rule_index++] = ".tabbrowser-tab > .tab-image-middle, .tabbrowser-tab > .tab-image-left, .tabbrowser-tab > .tab-image-right, .tabbrowser-tab > .tab-close-button { " + controlPaneStyle + " }";     
+    if (servicePaneStyle != emptyStyle)
+      cssRules[rule_index++] = "#tabstrip .tabbrowser-tab[selected=\"true\"] { " + servicePaneStyle + " }";
+    if (servicePaneStatusbarStyle != emptyStyle)
+      cssRules[rule_index++] = "#tabstrip .scrollbox-innerbox { " + servicePaneStatusbarStyle + " }";
+    
+    end tabstrip */
+      
+    if (servicePaneStatusbarStyle != emptyStyle)
+      cssRules[rule_index++] = "#servicepane-status-bar { " + servicePaneStatusbarStyle + " }";
+    if (mainStyle != emptyStyle)
+      cssRules[rule_index++] = "#mainplayer sb-sys-outer-frame { " + mainStyle + " }";
+    if (titlebarTextStyle)
+      cssRules[rule_index++] = "#sb-sys-title-title, .menubar-text, #displaypane_servicepane_bottom .sb-displaypane-label, #displaypane_contentpane_bottom .sb-displaypane-label, #displaypane_right_sidebar .sb-displaypane-label, #status-bar label, #sb_servicepane_treepane .servicepane-tree, .tabbrowser-tab label { color: " + titlebarTextStyle + " !important; }";
+     
+        
+    styleSheetUtility.deleteAllRules();
+    styleSheetUtility.insertAllRules(cssRules);
 	
   },
   
@@ -287,6 +348,32 @@ let CustomPersonaEditor = {
 		return true;
 	else
 		return false;
+  },
+  
+  debug: function(message) {
+    this._logger.logStringMessage(message);
+  },
+  
+  _createJSONObject: function() {
+    
+    var obj = {
+      "id": this._saveName.value.replace(/\s/g, ""),
+      "category": "Personal",
+      "name": this._saveName.value,
+      "controlPane": this._controlPane.value,
+      "servicePane": this._servicePane.value,
+      "titlebar": this._titlebar.value,
+      "dpServicePaneTitlebar": this._dpServicePaneTitlebar.value,
+      "dpContentPaneTitlebar": this._dpContentPaneTitlebar.value,
+      "dpRightSidebarTitlebar": this._dpRightSidebarTitlebar.value,
+      "navbar": this._navbar.value,
+      "statusbar": this._statusbar.value,
+      "servicePaneStatusbar": this._servicePaneStatusbar.value,
+      "main": this._main.value,
+      "titlebarText": this._titlebarText.value
+    }
+    
+    return obj;
   }
 };
 
