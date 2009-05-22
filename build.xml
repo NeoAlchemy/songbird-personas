@@ -3,13 +3,8 @@
         build personas for songbird
     </description>
 
-    <!-- chrome jar -->
-    <delete  file="chrome/personas.jar"/>
-    <jar destfile="chrome/personas.jar" basedir="chrome" />
-		
-
     <!-- Zip the results into an xpi file -->
-    <delete  file="personas-sb-0.6.xpi"/>
-    <zip destfile="personas-sb-0.6.xpi" basedir="./" excludes="build.xml, run.bat"/>
+    <delete  file="personas-sb-0.8.xpi"/>
+    <zip destfile="personas-sb-0.8.xpi" basedir="./" excludes="build.xml, run.bat"/>
 
 </project>

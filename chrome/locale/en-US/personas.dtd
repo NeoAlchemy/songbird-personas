@@ -1,23 +1,31 @@
-<!ENTITY personas_app_title 	  "Personas for Songbird">
+<!ENTITY personas_app_title "Personas for Songbird">
 
 <!ENTITY useDefaultPersona.label  "Default">
-<!ENTITY manual.label   		  "Manual...">
+<!ENTITY manual.label "Create/Edit...">
+<!ENTITY customPersona.label  "Custom Persona">
 
-<!ENTITY customPersona.label      "Custom Persona">
-
-<!ENTITY main.label        				"Outside Edge:">
-<!ENTITY controlPane.label        		"Control Pane:">
-<!ENTITY servicePane.label        		"Service Pane:">
-<!ENTITY titlebar.label           		"Top Bar:">
-<!ENTITY dpServicePaneTitlebar.label    "Bottom Service Pane Top Bar:">
-<!ENTITY dpContentPaneTitlebar.label    "Bottom Content Pane Top Bar:">
-<!ENTITY dpRightSidebarTitlebar.label   "Right Sidebar Top Bar:">
-<!ENTITY titlebarText.label         	"Text for Top Bar:">
-<!ENTITY navbar.label             		"Navigation Bar:">
-<!ENTITY statusbar.label          		"Status Bar:">
-<!ENTITY servicePaneStatusbar.label 	"Service Pane's Status Bar:">
+<!ENTITY main.label "Outside Edge:">
+<!ENTITY controlPane.label  "Control Pane:">
+<!ENTITY servicePane.label  "Service Pane:">
+<!ENTITY titlebar.label "Top Bar:">
+<!ENTITY dpServicePaneTitlebar.label  "Bottom Service Pane Top Bar:">
+<!ENTITY dpContentPaneTitlebar.label  "Bottom Content Pane Top Bar:">
+<!ENTITY dpRightSidebarTitlebar.label "Right Sidebar Top Bar:">
+<!ENTITY titlebarText.label "Text for Top Bar:">
+<!ENTITY navbar.label "Navigation Bar:">
+<!ENTITY statusbar.label  "Status Bar:">
+<!ENTITY servicePaneStatusbar.label "Service Pane's Status Bar:">
 
 <!ENTITY selectBackground.label     "Browse...">
-<!ENTITY closeButton.label          "Close">
-<!ENTITY previewButton.label        "Preview">
-<!ENTITY applyButton.label          "Apply">
+<!ENTITY importData.label "Persona Data Here:">
+<!ENTITY saveName.label "Name of Persona:">
+
+
+<!ENTITY closeButton.label  "Close">
+<!ENTITY saveButton.label "Save">
+<!ENTITY okButton.label "Ok">
+<!ENTITY cancelButton.label "Cancel">
+<!ENTITY importButton.label "Import">
+<!ENTITY exportButton.label "Export">
+<!ENTITY previewButton.label  "Preview">
+<!ENTITY applyButton.label  "Apply">

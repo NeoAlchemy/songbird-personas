@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?xml-stylesheet href="chrome://browser/skin/" type="text/css"?>
-<?xml-stylesheet href="chrome://personas/content/customPersonaEditor.css" type="text/css"?>
+<?xml-stylesheet href="chrome://personas/skin/customPersonaEditor.css" type="text/css"?>
 
 <!DOCTYPE overlay SYSTEM "chrome://personas/locale/personas.dtd">
 
@@ -17,14 +17,13 @@
   <script type="application/x-javascript;version=1.7" src="chrome://personas/content/init.js"/>
   <script type="application/x-javascript;version=1.7" src="chrome://personas/content/customPersonaEditor.js"/>
   
-  
   <vbox id="top">
     <hbox>
-      <image src="chrome://personas/content/personas-logo.png"/>
+      <image src="chrome://personas/skin/personas-logo.png"/>
     </hbox>
   </vbox>
 
-  <vbox id="form">
+  <vbox id="form" flex="1" style="overflow-y:auto">
     <description id="title" value="&customPersona.label;"/>
     <grid>
       <columns>
@@ -32,11 +31,11 @@
         <column/>
       </columns>
       <rows>
-		<row align="center">
+        <row align="center">
           <hbox flex="1" pack="end">
             <label control="main" value="&main.label;"/>
           </hbox>
-		  <hbox pref="custom.main">
+          <hbox pref="custom.main">
             <textbox id="main" />
             <button id="selectMainButton" label="&selectBackground.label;"
                     oncommand="CustomPersonaEditor.onSelectBackground(event)"/>
@@ -44,11 +43,11 @@
 						 type="button" onchange="CustomPersonaEditor.onSelectColor(event)" />
           </hbox>
         </row>
-		<row align="center">
+        <row align="center">
           <hbox flex="1" pack="end">
             <label control="titlebar" value="&titlebar.label;"/>
           </hbox>
-		  <hbox pref="custom.titlebar">
+          <hbox pref="custom.titlebar">
             <textbox id="titlebar" />
             <button id="selectTitlebarButton" label="&selectBackground.label;"
                     oncommand="CustomPersonaEditor.onSelectBackground(event)"/>
@@ -60,7 +59,7 @@
           <hbox flex="1" pack="end">
             <label control="dpServicePaneTitlebar" value="&dpServicePaneTitlebar.label;"/>
           </hbox>
-		  <hbox pref="custom.dpServicePaneTitlebar">
+          <hbox pref="custom.dpServicePaneTitlebar">
             <textbox id="dpServicePaneTitlebar" />
             <button id="selectDpServicePaneTitlebarButton" label="&selectBackground.label;"
                     oncommand="CustomPersonaEditor.onSelectBackground(event)"/>
@@ -72,7 +71,7 @@
           <hbox flex="1" pack="end">
             <label control="dpContentPaneTitlebar" value="&dpContentPaneTitlebar.label;"/>
           </hbox>
-		  <hbox pref="custom.dpContentPaneTitlebar">
+          <hbox pref="custom.dpContentPaneTitlebar">
             <textbox id="dpContentPaneTitlebar" />
             <button id="selectDpContentPaneTitlebarButton" label="&selectBackground.label;"
                     oncommand="CustomPersonaEditor.onSelectBackground(event)"/>
@@ -84,7 +83,7 @@
           <hbox flex="1" pack="end">
             <label control="dpRightSidebarTitlebar" value="&dpRightSidebarTitlebar.label;"/>
           </hbox>
-		  <hbox pref="custom.dpRightSidebarTitlebar">
+          <hbox pref="custom.dpRightSidebarTitlebar">
             <textbox id="dpRightSidebarTitlebar" />
             <button id="selectDpRightSidebarTitlebarButton" label="&selectBackground.label;"
                     oncommand="CustomPersonaEditor.onSelectBackground(event)"/>
@@ -96,7 +95,7 @@
           <hbox flex="1" pack="end">
             <label control="navbar" value="&navbar.label;"/>
           </hbox>
-		  <hbox pref="custom.navbar">
+          <hbox pref="custom.navbar">
             <textbox id="navbar" />
             <button id="selectNavbarButton" label="&selectBackground.label;"
                     oncommand="CustomPersonaEditor.onSelectBackground(event)"/>
@@ -120,7 +119,7 @@
           <hbox flex="1" pack="end">
             <label control="servicePane" value="&servicePane.label;"/>
           </hbox>
-		  <hbox pref="custom.servicePane">
+          <hbox pref="custom.servicePane">
             <textbox id="servicePane" />
             <button id="selectServicePaneButton" label="&selectBackground.label;"
                     oncommand="CustomPersonaEditor.onSelectBackground(event)"/>
@@ -132,7 +131,7 @@
           <hbox flex="1" pack="end">
             <label control="servicePaneStatusbar" value="&servicePaneStatusbar.label;"/>
           </hbox>
-		  <hbox pref="custom.servicePaneStatusbar">
+          <hbox pref="custom.servicePaneStatusbar">
             <textbox id="servicePaneStatusbar" />
             <button id="selectServicePaneStatusbarButton" label="&selectBackground.label;"
                     oncommand="CustomPersonaEditor.onSelectBackground(event)"/>
@@ -144,7 +143,7 @@
           <hbox flex="1" pack="end">
             <label control="statusbar" value="&statusbar.label;"/>
           </hbox>
-		  <hbox pref="custom.statusbar">
+          <hbox pref="custom.statusbar">
             <textbox id="statusbar" />
             <button id="selectStatusbarButton" label="&selectBackground.label;"
                     oncommand="CustomPersonaEditor.onSelectBackground(event)"/>
@@ -156,7 +155,7 @@
           <hbox flex="1" pack="end">
             <label control="titlebarText" value="&titlebarText.label;"/>
           </hbox>
-		  <hbox pref="custom.titlebarText">
+          <hbox pref="custom.titlebarText">
             <textbox id="titlebarText" />
             <colorpicker id="selecttitlebarTextColor" palettename="standard" 
 						 type="button" onchange="CustomPersonaEditor.onSelectColor(event)" />
@@ -165,10 +164,30 @@
       </rows>
     </grid>
     <hbox style="margin-top: 2em">
-      <button label="Close" oncommand="CustomPersonaEditor.onClose()"/>
+      <button label="&closeButton.label;" oncommand="CustomPersonaEditor.onClose()"/>
       <spacer flex="1"/>
-      <button label="Preview" oncommand="CustomPersonaEditor.onPreview()"/>
-      <button label="Apply" oncommand="CustomPersonaEditor.onApply()"/>
+      <button label="&previewButton.label;" oncommand="CustomPersonaEditor.onPreview()"/>
+      <button label="&saveButton.label;" oncommand="CustomPersonaEditor.onSave()"/>
+    </hbox>
+    <hbox id="saveElements" style="margin-top: 2em" hidden="true">
+      <label value="&saveName.label;"/>
+      <textbox id="saveName" />
+      <spacer flex="1"/>
+      <button label="&okButton.label;" oncommand="CustomPersonaEditor.onConfirmSave()"/>
+      <button label="&cancelButton.label;" oncommand="CustomPersonaEditor.onCancelConfirmSave()"/>
+    </hbox>
+    <hbox style="margin-top: 2em">
+      <spacer flex="1"/>
+      <button label="&exportButton.label;" oncommand="CustomPersonaEditor.onExport()"/>
+      <button label="&importButton.label;" oncommand="CustomPersonaEditor.onImport()"/>
+    </hbox>
+    <hbox id="importElements" style="margin-top: 2em" hidden="true">
+      <label value="&importData.label;" id="importLabel"/>
+      <textbox id="importSpace" />
+      <spacer flex="1"/>
+      <button label="&okButton.label;" id="okConfirmImport" oncommand="CustomPersonaEditor.onConfirmImport()"/>
+      <button label="&cancelButton.label;" id="cancelConfirmImport" oncommand="CustomPersonaEditor.onCancelConfirmImport()"/>
     </hbox>
   </vbox>
+  
 </window>

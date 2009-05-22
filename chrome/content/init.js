@@ -1,3 +1,6 @@
+/**
+ * Import the following JSM modules to be used through out the context of personas for songbird
+ */
 const PERSONAS_EXTENSION_ID = "personas@neoalchemy.org";
 
 {
@@ -13,8 +16,9 @@ const PERSONAS_EXTENSION_ID = "personas@neoalchemy.org";
     resProt.setSubstitution("personas", ioSvc.newFileURI(extD));
   }
 
-  Components.utils.import("resource://personas/chrome/content/modules/PrefCache.js");
   Components.utils.import("resource://personas/chrome/content/modules/stylesheetManager.jsm");
+  Components.utils.import("resource://personas/chrome/content/modules/JSON.jsm");
+  Components.utils.import("resource://personas/chrome/content/modules/PrefCache.jsm");
   
 }
 
