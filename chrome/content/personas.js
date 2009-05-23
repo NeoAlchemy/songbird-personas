@@ -42,7 +42,11 @@ let PersonaController = {
   _getPref: function(aPrefName, aDefaultValue) {
     return this._prefCache.getPref(aPrefName, aDefaultValue);
   },
-
+  
+  get _menuPopup() {
+    delete this._menuPopup;
+    return this._menuPopup = document.getElementById("personas-selector-menu");
+  },
   
   //**************************************************************************//
   // Initialization & Destruction
@@ -178,47 +182,45 @@ let PersonaController = {
   // Popup Construction
 
   onMenuButtonMouseDown: function(event) {
-    var menuPopup = document.getElementById('personas-selector-menu');
     var menuButton = document.getElementById("personas-selector-button");
-    
+    this.debug("onMenuButtonMouseDown");
     // If the menu popup isn't on the menu button, then move the popup onto
     // the button so the popup appears when the user clicks the button.  We'll
     // move the popup back to the Tools > Sync menu when the popup hides.
-    if (menuPopup.parentNode != menuButton) {
-        menuButton.appendChild(menuPopup);
+    if (this._menuPopup.parentNode != menuButton) {
+        menuButton.appendChild(this._menuPopup);
         this._rebuildMenuItem();
     }
   },
 
   onMenuPopupHiding: function() {
-    var menuPopup = document.getElementById('personas-selector-menu');
     var menu = document.getElementById('personas-menu');
-	
+    this.debug("onMenuPopupHiding");
     // If the menu popup isn't on the Tools > Personas menu, then move the popup
     // back onto that menu so the popup appears when the user selects the menu.
     // We'll move the popup back to the menu button when the user clicks on
     // the menu button.
-    if (menuPopup.parentNode != menu) {
-      menu.appendChild(menuPopup);
+    if (this._menuPopup.parentNode != menu) {
+      menu.appendChild(this._menuPopup);
       this._rebuildMenuItem();
     }
   },
 
   onPersonaPopupShowing: function(event) {
-    if (event.target == this._menu)
+    this.debug("onPersonaPopupShowing");
+    if (event.target == this._menuPopup)
       this._rebuildMenuItem();
     return true;
   },
   
   _rebuildMenuItem: function() {
-    var menuPopup = document.getElementById('personas-selector-menu');
     
     let openingSeparator = document.getElementById("personas-opening-separator");
     let closingSeparator = document.getElementById("personas-closing-separator");
     
     // Remove everything between the two separators.
     while (openingSeparator.nextSibling && openingSeparator.nextSibling != closingSeparator)
-      menuPopup.removeChild(openingSeparator.nextSibling);
+      this._menuPopup.removeChild(openingSeparator.nextSibling);
       
     // add items back to menu
     var menuItems = this._listOfItems();
@@ -227,7 +229,7 @@ let PersonaController = {
       for (var i=0;i<category.length;i++)
         menuFolder.push(this._createMenuItem(category[i].name, category[i].id));
       //all personas in the array should belong to the same category
-      menuPopup.insertBefore(this._createMenuFolder(category[0].category, menuFolder), closingSeparator);
+      this._menuPopup.insertBefore(this._createMenuFolder(category[0].category, menuFolder), closingSeparator);
     }
     this._changeSelectedItem();
   },
